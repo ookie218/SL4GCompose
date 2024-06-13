@@ -9,5 +9,5 @@ data class Artist(
     val id: Int,
     val name: String,
     val nickname: String?,
-    val imageResourceId: Int?,
+    val imageResourceId: Int,
     val artistBio: String)
