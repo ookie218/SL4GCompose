@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">SL4GCompose</string>
+
+    <!-- Navigation Strings -->
+    <string name="home_tab">Home</string>
+    <string name="artist_tab">Artists</string>
+    <string name="quiz_tab">Quiz</string>
+    <string name="media_tab">Media</string>
+    <string name="contact_tab">Contact</string>
+
+    <string name="sl4g_logo">SL4G_Logo</string>
+
+    <string name="group_name">SwitchinLanes</string>
+    <string name="group_bio">"SwitchinLanes" (SL4G) was founded in 2014 by Deane Walden.
+        The group consists of 6 members: Ronald Easley (Ron Rhythm), Michael Ebron (Ookie Ebron),
+        Samuel McFadden Jr. (S.H.E.E.S.H.), Justin Shelton (JuJu), and Jerimy Mask (JMask).
+        The majority currently reside on the outskirts of Richmond, Virginia.
+        Each member of the group has profound life changing testimonies that ultimately drew them
+        together, and it all begins with Founder, Deane Walden.
+        -SwitchinLanes-
+    </string>
+
+    <!-- Artists Info -->
+    <string name="deane_full_name">Deane Walden</string>
+    <string name="deane_bio">Deane Walden was born and raised in Richmond, VA.
+        Prior to the formation of SwitchinLanes, Deane focused on the production of secular music
+        with another group by the name of “Paperchasers”. After nine consecutive years of promoting
+        sex, drugs, and violence, conviction finally struck like a jolt of lightning causing Deane
+        to surrender his life to Christ. He immediately turned his life around and initially
+        believed that giving up music was a part of the process until God told him otherwise.
+        Shortly after, Deane was inspired to create the group “SwitchinLanes4God” signifying not
+        only his change, but his commitment to The Most High. The pursuit for members had begun.
+    </string>
+
+    <string name="ron_full_name">Ron Rhythm</string>
+    <string name="ron_bio">Ron Rhythm was born in Germany, but later moved to the United States
+        where he settled in Richmond, VA. He lived a pretty peculiar lifestyle as a street drag
+        racing secular R &amp; B artist. He first met founder, Deane Walden before he was saved, however
+        after he Switched Lanes he began attending church growing a closer bond with God and the
+        newly founded group.
+    </string>
+
+    <string name="ookie_full_name">Ookie Ebron</string>
+    <string name="ookie_nick_name">"Dread"</string>
+    <string name="ookie_bio">Ookie Ebron was born in Albany, New York but moved to Richmond Virginia
+        at the age of seven. He was raised in the Christian faith but didn\'t develop a relationship
+        with Jesus Christ until the age of seventeen. He began to struggle with his desire to chase
+        women, always searching for companionship to cover the void of love that eluded his life
+        where only Christ could fill. Ookie experienced a life changing encounter with The Holy
+        Spirit at Winterfest 2010 in Gatlinburg Tennessee. Since that experience, Ookie has begun to
+        bear his cross and venture into different aspects of ministry. He has served in children\'s
+        ministry, street evangelism, and even spoken in the pulpit before God revealed to him, the
+        gift of music. Ookie takes great delight in serving and is looking forward to more
+        opportunities to spread the Gospel!
+    </string>
+
+    <string name="sam_full_name">Samuel McFadden</string>
+    <string name="sam_nick_name">"S.H.E.E.S.H."</string>
+    <string name="sam_bio">S.H.E.E.S.H. was born and raised in Richmond, VA. He was groomed heavily
+        in the Christian faith but turned away and rebelled every chance he got. This sent
+        S.H.E.E.S.H. spiraling down a pathway of self-destruction. After being incarcerated twice,
+        God softened his heart and S.H.E.E.S.H. finally opened his heart to Jesus. From that point
+        forward he began attending a local ministry as a result of an invitation from group member,
+        JMask, where he would later introduce others. Henceforth S.H.E.E.S.H. has remained a soldier
+        in the army of the Lord using music as his weapon.
+    </string>
+
+    <string name="juju_full_name">Justin Shelton</string>
+    <string name="juju_nick_name">"JuJu"</string>
+    <string name="juju_bio">JuJu was born in Richmond, VA. He was raised in the Christian faith at
+        a young age, but turned away from his faith choosing to live a street lifestyle. At the age
+        eighteen he rededicated his life to Christ, but due to the lack of spiritual nourishment, he
+        turned away from his faith a second time. Two years later he experienced a near death
+        altercation leaving him with thirteen stab wounds causing him to lose his right eye
+        completely. During his healing process, he was invited to a local ministry by group member
+        S.H.E.E.S.H. where he decided to truly commit to Christ with the desire to tell everyone
+        about His amazing grace.
+    </string>
+
+    <string name="jmask_full_name">Jeremy Mask</string>
+    <string name="jmask_nick_name">"JMask"</string>
+    <string name="jmask_bio">JMask is a student-athlete born and raised in Richmond, VA, but like
+        many others, the street life appealed more to him. As a result of a school expulsion in the
+        11th grade, he connected with a pastor’s daughter. With the intentions of spending time with
+        this young lady, JMask attended church services, prayer services, and bible studies where
+        God began to open his heart. A year later he became a new creation in Christ. JMask believes
+        that because he was never introduced to the Gospel growing up that it is his duty to tell
+        the world about his Jesus, whether it’s through the music of SwitchinLanes or evangelism,
+        Jesus will be proclaimed.
+    </string>
+
+    <!-- App Assets -->
+    <string name="referenceYoutubeTag">Please visit the Youtube link above to access more of our videos!</string>
+    <string name="music_videos_tag">Music Videos</string>
+    <string name="discography_tag">Discography</string>
+    <string name="contactPrompt">We greatly appreciate you all taking part on this journey with us as we walk closer to Christ. Please take the opportunity to reach out to us. Rather it be for prayer or to book The Lanes!</string>
+    <string name="name_heading">Name:</string>
+    <string name="name_enter_hint">Enter Name</string>
+    <string name="text_heading">Text:</string>
+    <string name="text_enter_hint">How can we serve you?</string>
+    <string name="prayer_button_label">Prayer</string>
+    <string name="book_us_button_label">Book Us</string>
+
+
+</resources>
