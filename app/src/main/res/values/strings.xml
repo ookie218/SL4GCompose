@@ -101,6 +101,8 @@
     <string name="text_enter_hint">How can we serve you?</string>
     <string name="prayer_button_label">Prayer</string>
     <string name="book_us_button_label">Book Us</string>
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show more</string>
 
 
 </resources>
