@@ -8,6 +8,7 @@ package com.ookie.sl4gcompose.model
 data class Artist(
     val id: Int,
     val name: String,
-    val nickname: String?,
+    val nickname: String,
     val imageResourceId: Int,
-    val artistBio: String)
+    val artistBio: String
+)

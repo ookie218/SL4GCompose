@@ -10,14 +10,14 @@ class ArtistRepositoryImplementation : ArtistRepository {
             Artist(
                 id = 0,
                 name = R.string.deane_full_name.toString(),
-                nickname = null,
+                nickname = "",
                 imageResourceId = R.drawable.deaneprofilepic,
                 artistBio = R.string.deane_bio.toString(),
             ),
             Artist(
                 id = 1,
                 name = R.string.ron_full_name.toString(),
-                nickname = null,
+                nickname = "",
                 imageResourceId = R.drawable.ronprofilepic,
                 artistBio = R.string.ron_bio.toString(),
             ),

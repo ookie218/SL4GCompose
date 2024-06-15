@@ -10,6 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.ookie.sl4gcompose.data.ArtistRepositoryImplementation
+import com.ookie.sl4gcompose.ui.screens.ArtistScreen
+import com.ookie.sl4gcompose.ui.screens.ArtistScreenViewModel
 import com.ookie.sl4gcompose.ui.theme.SL4GComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    ArtistScreen()
                 }
             }
         }
