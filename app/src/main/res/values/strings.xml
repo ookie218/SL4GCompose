@@ -91,6 +91,13 @@
         Jesus will be proclaimed.
     </string>
 
+    <!-- Album Names -->
+    <string name="album_a_road_less_traveled">A Road Less Traveled</string>
+    <string name="album_water_walking">Water Walking</string>
+    <string name="album_no_longer_bound">No Longer Bound</string>
+    <string name="album_rhythm_of_heaven">Rhythm Of Heaven</string>
+    <string name="album_no_brakes">No Brakes</string>
+
     <!-- App Assets -->
     <string name="referenceYoutubeTag">Please visit the Youtube link above to access more of our videos!</string>
     <string name="music_videos_tag">Music Videos</string>
