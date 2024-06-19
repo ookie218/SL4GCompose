@@ -97,9 +97,11 @@
     <string name="contactPrompt">We greatly appreciate you all taking part on this journey with us as we walk closer to Christ. Please take the opportunity to reach out to us. Rather it be for prayer or to book The Lanes!</string>
     <string name="name_heading">Name:</string>
     <string name="name_enter_hint">Enter Name</string>
+    <string name="phone_number_heading">Phone Number:</string>
     <string name="text_heading">Text:</string>
+    <string name="message_heading">Message:</string>
     <string name="text_enter_hint">How can we serve you?</string>
-    <string name="prayer_button_label">Prayer</string>
+    <string name="submit_button_label">Submit</string>
     <string name="book_us_button_label">Book Us</string>
     <string name="show_less">Show less</string>
     <string name="show_more">Show more</string>

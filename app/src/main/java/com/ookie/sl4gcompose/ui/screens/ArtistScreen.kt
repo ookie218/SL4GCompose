@@ -126,7 +126,7 @@ fun ArtistItem(artist: Artist) {
 fun ArtistItemPreview() {
     ArtistItem(artist = Artist(
         1,
-        R.string.ron_full_name.toString(),
+        R.string.ookie_full_name.toString(),
         "",
         R.drawable.ookieprofilepic,
         "test")
