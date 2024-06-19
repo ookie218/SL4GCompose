@@ -8,6 +8,29 @@ import androidx.lifecycle.ViewModel
 
 class ContactScreenViewModel: ViewModel() {
 
-    //var name by rememberSaveable { mutableStateOf("") }
+    lateinit var name: String
+    lateinit var phoneNumber: String
+    lateinit var messageBody: String
+
+    fun validateMessage() {
+        nameValidate()
+        phoneNumberValidate()
+        messageBodyValidate()
+    }
+
+    private fun nameValidate(): Boolean {
+        // TODO: this also needs to ensure it is only alpha characters
+        return name.isNotEmpty()
+    }
+
+    private fun phoneNumberValidate(): Boolean {
+        // TODO: this also needs to ensure it is only numerical characters
+        return phoneNumber.isNotEmpty()
+    }
+
+    private fun messageBodyValidate(): Boolean {
+        return messageBody.isNotEmpty()
+    }
+
 
 }

@@ -19,11 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ookie.sl4gcompose.R
 import com.ookie.sl4gcompose.model.Message
 
 @Composable
-fun ContactScreen() {
+fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -83,6 +84,7 @@ fun ContactScreen() {
                     phoneNumber = phoneNumber,
                     messageBody = messageBody
                 )
+                contactScreenViewModel.validateMessage()
             },
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
