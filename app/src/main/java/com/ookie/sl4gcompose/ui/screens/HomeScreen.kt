@@ -3,6 +3,7 @@ package com.ookie.sl4gcompose.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -28,6 +29,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             contentDescription = stringResource(id = R.string.group_photo_description),
             modifier.size(150.dp)
         )
+        Spacer(modifier = Modifier.padding(8.dp))
         Text(
             text = stringResource(id = R.string.group_bio),
             modifier = Modifier.padding(16.dp),
