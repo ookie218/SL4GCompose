@@ -38,7 +38,7 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
 
         Image(
             painter = painterResource(id = R.drawable.sl4gministriesdefault),
-            contentDescription = stringResource(id = R.string.group_photo_description),
+            contentDescription = stringResource(id = R.string.sl4g_photo_description),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
         )

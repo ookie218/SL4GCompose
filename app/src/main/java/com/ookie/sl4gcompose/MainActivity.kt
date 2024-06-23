@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ookie.sl4gcompose.data.ArtistRepositoryImplementation
 import com.ookie.sl4gcompose.ui.screens.ArtistScreen
 import com.ookie.sl4gcompose.ui.screens.ArtistScreenViewModel
+import com.ookie.sl4gcompose.ui.screens.MediaScreen
 import com.ookie.sl4gcompose.ui.theme.SL4GComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,9 +24,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.primary
                 ) {
-                    ArtistScreen()
+                    MediaScreen()
                 }
             }
         }

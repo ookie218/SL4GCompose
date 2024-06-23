@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -85,8 +87,9 @@ fun ArtistItem(artist: Artist) {
         Image(
             painter = painterResource(id = artist.imageResourceId),
             contentDescription = artist.name,
-            Modifier.size(72.dp)
-            // TODO: Rounded Image corners
+            modifier = Modifier
+                .size(72.dp)
+                .clip(CircleShape)
         )
         Spacer(modifier = Modifier.padding(8.dp))
         Column (

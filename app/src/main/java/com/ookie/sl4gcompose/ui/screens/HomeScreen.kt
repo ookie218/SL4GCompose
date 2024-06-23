@@ -26,12 +26,12 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.sl4gministriesdefault),
-            contentDescription = stringResource(id = R.string.group_photo_description),
+            contentDescription = stringResource(id = R.string.sl4g_photo_description),
             modifier.size(150.dp)
         )
         Spacer(modifier = Modifier.padding(8.dp))
         Text(
-            text = stringResource(id = R.string.group_bio),
+            text = stringResource(id = R.string.sl4g_bio),
             modifier = Modifier.padding(16.dp),
             style = Typography.bodyMedium
         )

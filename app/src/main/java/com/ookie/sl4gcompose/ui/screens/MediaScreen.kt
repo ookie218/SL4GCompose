@@ -1,54 +1,143 @@
 package com.ookie.sl4gcompose.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.Text
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.ookie.sl4gcompose.R
+import com.ookie.sl4gcompose.model.Album
 
 @Composable
 fun MediaScreen(mediaScreenViewModel: MediaScreenViewModel = viewModel()) {
+
+    val albums = mediaScreenViewModel.getAlbumData()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-                text = stringResource(id = R.string.group_name_full),
-        style = TextStyle(Color.Black)
-        )
-        Spacer(modifier = Modifier.padding(8.dp))
-        Text(
-            text = stringResource(id = R.string.discography_tag),
-            style = TextStyle(Color.Black)
-        )
-        // TODO: Album Carousel / with names above albums
+        MediaGroupNameHeader()
+
         Spacer(modifier = Modifier.padding(16.dp))
-        Text(
-            text = stringResource(id = R.string.music_videos_tag),
-            style = TextStyle(Color.Black)
-        )
-        Text(
-            text = stringResource(id = R.string.referenceYoutubeTag),
-            style = TextStyle(Color.Black)
-        )
+
+        DiscographySectionHeader()
         Spacer(modifier = Modifier.padding(8.dp))
-        // TODO: Youtube integration / maybe spotify?
+        AlbumDiscographyCarousel(albums)
 
+        Spacer(modifier = Modifier.padding(16.dp))
 
+        MediaPlayerSection()
+
+        Spacer(modifier = Modifier.padding(8.dp))
     }
 
 }
+
+@Composable
+fun MediaTextHeaders(title: Int, fontSize: TextUnit  = 24.sp, modifier: Modifier = Modifier) {
+    Text(
+        text = stringResource(id = title),
+        fontSize = fontSize,
+        fontWeight = FontWeight.Bold,
+        style = TextStyle(Color.Black)
+    )
+}
+
+@Composable
+fun MediaGroupNameHeader() {
+    MediaTextHeaders(title = R.string.sl4g_name_full , fontSize = 32.sp)
+}
+
+@Composable
+fun DiscographySectionHeader() {
+    MediaTextHeaders(title = R.string.discography_tag)
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun AlbumListItems(albums: List<Album>) {
+
+    HorizontalPager(state = rememberPagerState {
+        albums.size
+    }) { index ->
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .size(400.dp)
+        ) {
+            MediaTextHeaders(
+                title = albums[index].albumName,
+                fontSize = 12.sp,
+                modifier = Modifier
+            )
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .clip(RoundedCornerShape(24.dp)),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(albums[index].imageResourceId)
+                    .build(),
+                contentDescription = "Album",
+                contentScale = ContentScale.Crop
+            )
+        }
+    }
+
+}
+
+@Composable
+fun AlbumDiscographyCarousel(
+    albumList: List<Album>,
+    modifier: Modifier = Modifier
+) {
+    AlbumListItems(albums = albumList)
+}
+
+@Composable
+fun MediaPlayerSection() {
+
+    /***
+     * Youtube API that was used in previous version of app is deprecated.
+     * WIll look into Webview or Spotify API for substitute
+     */
+
+    MediaTextHeaders(title = R.string.music_videos_tag )
+    Text(
+        text = stringResource(id = R.string.referenceYoutubeTag),
+        style = TextStyle(Color.Black)
+    )
+
+}
+
 
 @Preview(showBackground = true)
 @Composable

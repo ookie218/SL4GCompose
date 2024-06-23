@@ -8,12 +8,12 @@
     <string name="media_tab">Media</string>
     <string name="contact_tab">Contact</string>
 
+    <!-- Group Info -->
     <string name="sl4g_logo">SL4G_Logo</string>
-
-    <string name="group_name">SwitchinLanes</string>
-    <string name="group_name_full">Switchin Lanes 4 God</string>
-    <string name="group_photo_description">SwitchinLanes Image Logo</string>
-    <string name="group_bio">"SwitchinLanes" (SL4G) was founded in 2014 by Deane Walden.
+    <string name="sl4g_name">SwitchinLanes</string>
+    <string name="sl4g_name_full">SwitchinLanes4God</string>
+    <string name="sl4g_photo_description">SwitchinLanes Image Logo</string>
+    <string name="sl4g_bio">"SwitchinLanes" (SL4G) was founded in 2014 by Deane Walden.
         The group consists of 6 members: Ronald Easley (Ron Rhythm), Michael Ebron (Ookie Ebron),
         Samuel McFadden Jr. (S.H.E.E.S.H.), Justin Shelton (JuJu), and Jerimy Mask (JMask).
         The majority currently reside on the outskirts of Richmond, Virginia.
@@ -98,6 +98,25 @@
     <string name="album_rhythm_of_heaven">Rhythm Of Heaven</string>
     <string name="album_no_brakes">No Brakes</string>
 
+    <!-- URLS -->
+    <string name="sl4g_website_url">"http://www.sl4g.com"</string>
+    <string name="sl4g_email">"switchinlanes4god@gmail.com"</string>
+
+    <!-- Album URLS -->
+    <!-- A road less traveled, Water walking,  as well as No Longer Bound were listed as mixtapes and not available for purchase.
+     These were hosted on the SL4G site. Will find somewhere to host and update. -->
+    <string name="album_a_road_less_traveled_url">"http://www.sl4g.com"</string>
+    <string name="album_water_walking_url">"http://www.sl4g.com"</string>
+    <string name="album_no_longer_bound_url">"http://www.sl4g.com"</string>
+    <string name="album_rhythm_of_heaven_url">"https://itunes.apple.com/us/album/rhythm-of-heaven/1216497679"</string>
+    <string name="album_no_brakes_url">"https://itunes.apple.com/us/album/no-brakes/1343983901"</string>
+
+    <!-- Social Media URLS -->
+    <string name="instagram_url">"http://www.instagram.com/switchinlanes4g"</string>
+    <string name="twitter_url">"http://www.twitter.com/switchinlanes4g"</string>
+    <string name="youtube_url">"http://www.youtube.com/user/switchinlanes4god"</string>
+
+
     <!-- App Assets -->
     <string name="referenceYoutubeTag">Please visit the Youtube link above to access more of our videos!</string>
     <string name="music_videos_tag">Music Videos</string>
@@ -113,6 +132,7 @@
     <string name="book_us_button_label">Book Us</string>
     <string name="show_less">Show less</string>
     <string name="show_more">Show more</string>
+
 
 
 </resources>
