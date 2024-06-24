@@ -1,6 +1,8 @@
 package com.ookie.sl4gcompose.ui.screens
 
+
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,12 +19,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -85,9 +86,12 @@ fun DiscographySectionHeader() {
 @Composable
 fun AlbumListItems(albums: List<Album>) {
 
+    val uriHandler = LocalUriHandler.current
+
     HorizontalPager(state = rememberPagerState {
         albums.size
     }) { index ->
+        val albumUriString = stringResource(id = albums[index].urlLink)
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -102,11 +106,14 @@ fun AlbumListItems(albums: List<Album>) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .clip(RoundedCornerShape(24.dp)),
+                    .clip(RoundedCornerShape(24.dp))
+                    .clickable {
+                        uriHandler.openUri(albumUriString)
+                    },
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(albums[index].imageResourceId)
                     .build(),
-                contentDescription = "Album",
+                contentDescription = "${albums[index].albumName}",
                 contentScale = ContentScale.Crop
             )
         }
