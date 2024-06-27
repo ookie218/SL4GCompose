@@ -64,6 +64,9 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation("io.coil-kt:coil-compose:2.6.0")
 
+    //youtube Player - iFrame Player
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
 
 
     testImplementation(libs.junit)
