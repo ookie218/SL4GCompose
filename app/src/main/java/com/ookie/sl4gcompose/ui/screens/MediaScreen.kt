@@ -38,7 +38,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ookie.sl4gcompose.R
 import com.ookie.sl4gcompose.model.Album
-import com.ookie.sl4gcompose.model.YoutubePlayerState
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -163,7 +163,9 @@ fun MediaPlayerSection() {
 fun YouTubeVideoPlayer(
     url: String,
     lifecycleOwner: LifecycleOwner,
-    //state: YoutubePlayerState
+    isPlaying: (Boolean) -> Unit = {},
+    isLoading: (Boolean) -> Unit = {},
+    onVideoEnded: () -> Unit = {}
 ) {
     AndroidView(
         factory = {
@@ -172,13 +174,35 @@ fun YouTubeVideoPlayer(
 
                 addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
-                        youTubePlayer.loadVideo(url, 0f)
+                        youTubePlayer.cueVideo(url, 0f)
+                        PlayerConstants.PlayerState.UNSTARTED
+                    }
+                    override fun onStateChange(
+                        youTubePlayer: YouTubePlayer,
+                        state: PlayerConstants.PlayerState
+                    ) {
+                        super.onStateChange(youTubePlayer, state)
+                        when(state){
+                            PlayerConstants.PlayerState.BUFFERING -> {
+                                isLoading.invoke(true)
+                                isPlaying.invoke(false)
+                            }
+                            PlayerConstants.PlayerState.PLAYING -> {
+                                isLoading.invoke(false)
+                                isPlaying.invoke(true)
+                            }
+                            PlayerConstants.PlayerState.ENDED -> {
+                                isPlaying.invoke(false)
+                                isLoading.invoke(false)
+                                onVideoEnded.invoke()
+                            }
+                            else -> {}
+                        }
                     }
                 })
             }
         }
     )
-
 }
 
 
