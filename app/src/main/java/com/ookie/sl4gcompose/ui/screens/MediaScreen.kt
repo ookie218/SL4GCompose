@@ -60,6 +60,7 @@ fun MediaScreen(mediaScreenViewModel: MediaScreenViewModel = viewModel()) {
         Spacer(modifier = Modifier.padding(16.dp))
 
         DiscographySectionHeader()
+        DiscographySubsectionText()
         Spacer(modifier = Modifier.padding(8.dp))
         AlbumDiscographyCarousel(albums)
 
@@ -73,7 +74,7 @@ fun MediaScreen(mediaScreenViewModel: MediaScreenViewModel = viewModel()) {
 }
 
 @Composable
-fun MediaTextHeaders(title: Int, fontSize: TextUnit  = 24.sp, modifier: Modifier = Modifier) {
+fun MediaTextHeaders(title: Int, fontSize: TextUnit  = 24.sp, fontWeight: FontWeight?,  modifier: Modifier = Modifier) {
     Text(
         text = stringResource(id = title),
         fontSize = fontSize,
@@ -84,12 +85,17 @@ fun MediaTextHeaders(title: Int, fontSize: TextUnit  = 24.sp, modifier: Modifier
 
 @Composable
 fun MediaGroupNameHeader() {
-    MediaTextHeaders(title = R.string.sl4g_name_full , fontSize = 32.sp)
+    MediaTextHeaders(title = R.string.sl4g_name_full , fontSize = 32.sp, fontWeight = FontWeight.Bold)
 }
 
 @Composable
 fun DiscographySectionHeader() {
-    MediaTextHeaders(title = R.string.discography_tag)
+    MediaTextHeaders(title = R.string.discography_tag, fontWeight = FontWeight.Bold)
+}
+
+@Composable
+fun DiscographySubsectionText() {
+    MediaTextHeaders(title = R.string.discography_sub_tag, fontSize = 8.sp, fontWeight = FontWeight.Normal)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -110,6 +116,7 @@ fun AlbumListItems(albums: List<Album>) {
             MediaTextHeaders(
                 title = albums[index].albumName,
                 fontSize = 12.sp,
+                fontWeight = FontWeight.Normal,
                 modifier = Modifier
             )
             AsyncImage(
@@ -144,7 +151,7 @@ fun MediaPlayerSection() {
 
     val youtubeUrl = "0taaCWMbJz0"
 
-    MediaTextHeaders(title = R.string.music_videos_tag )
+    MediaTextHeaders(title = R.string.music_videos_tag, fontWeight = FontWeight.Normal)
     Text(
         text = stringResource(id = R.string.referenceYoutubeTag),
         style = TextStyle(Color.Black)

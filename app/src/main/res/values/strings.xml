@@ -105,9 +105,9 @@
     <!-- Album URLS -->
     <!-- A road less traveled, Water walking,  as well as No Longer Bound were listed as mixtapes and not available for purchase.
      These were hosted on the SL4G site. Will find somewhere to host and update. -->
-    <string name="album_a_road_less_traveled_url">"http://www.sl4g.com"</string>
-    <string name="album_water_walking_url">"http://www.sl4g.com"</string>
-    <string name="album_no_longer_bound_url">"http://www.sl4g.com"</string>
+    <string name="album_a_road_less_traveled_url">"https://drive.google.com/drive/folders/1s-JivBs-qW3yF0OeLCBH-FBRXWxTmlVw?usp=drive_link"</string>
+    <string name="album_water_walking_url">"https://drive.google.com/drive/folders/10Naearpw4F3rMYDnX1Rk0GtmDUKNibjx?usp=drive_link"</string>
+    <string name="album_no_longer_bound_url">"https://drive.google.com/drive/folders/1XHTHIiq2O9zAjSHCun1UnRwzgILFzY7f?usp=drive_link"</string>
     <string name="album_rhythm_of_heaven_url">"https://itunes.apple.com/us/album/rhythm-of-heaven/1216497679"</string>
     <string name="album_no_brakes_url">"https://itunes.apple.com/us/album/no-brakes/1343983901"</string>
 
@@ -121,6 +121,7 @@
     <string name="referenceYoutubeTag">Please visit the Youtube link above to access more of our videos!</string>
     <string name="music_videos_tag">Music Videos</string>
     <string name="discography_tag">Discography</string>
+    <string name="discography_sub_tag">(Swipe Album below to cycle projects)</string>
     <string name="contactPrompt">We greatly appreciate you all taking part on this journey with us as we walk closer to Christ. Please take the opportunity to reach out to us. Rather it be for prayer or to book The Lanes!</string>
     <string name="name_heading">Name:</string>
     <string name="name_enter_hint">Enter Name</string>

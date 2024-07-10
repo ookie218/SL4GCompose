@@ -21,6 +21,9 @@ import androidx.compose.material.icons.outlined.MusicVideo
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -35,8 +38,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.ookie.sl4gcompose.data.ArtistRepositoryImplementation
 import com.ookie.sl4gcompose.model.TabItem
+import com.ookie.sl4gcompose.navigation.Navigation
 import com.ookie.sl4gcompose.ui.screens.ArtistScreen
 import com.ookie.sl4gcompose.ui.screens.ArtistScreenViewModel
 import com.ookie.sl4gcompose.ui.screens.ContactScreen
@@ -48,76 +55,103 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // TODO: Follow same coding practices - Make into it's own class / repository and list
         val tabItems = listOf(
             TabItem(
                 title = "Home",
+                route = "Home",
                 unselectedIcon = Icons.Outlined.Home,
                 selectedIcon = Icons.Filled.Home
             ),
             TabItem(
                 title = "Artists",
+                route = "Artists",
                 unselectedIcon = Icons.Outlined.Person,
                 selectedIcon = Icons.Filled.Person
             ),
             TabItem(
                 title = "Media",
+                route = "Media",
                 unselectedIcon = Icons.Outlined.MusicVideo,
                 selectedIcon = Icons.Filled.MusicVideo
             ),
             TabItem(
                 title = "Email",
+                route = "Email",
                 unselectedIcon = Icons.Outlined.Mail,
                 selectedIcon = Icons.Filled.Mail
             )
         )
         setContent {
             SL4GComposeTheme {
+
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = tabItems[0].route) {
+                    composable(tabItems[0].route) {
+                        HomeScreen()
+                    }
+                    composable(tabItems[1].route) {
+                        ArtistScreen()
+                    }
+                    composable(tabItems[2].route) {
+                        MediaScreen()
+                    }
+                    composable(tabItems[3].route) {
+                        ContactScreen()
+                    }
+                }
+
+                // TODO: All of this needs to be extracted to a class - not in main activity (at least in it's own function)
+                var selectedTabIndex by remember {
+                    mutableIntStateOf(0)
+                }
+                val pagerState = rememberPagerState {
+                    tabItems.size
+                }
+                LaunchedEffect(key1 = selectedTabIndex ) {
+                    pagerState.animateScrollToPage(selectedTabIndex)
+                }
+                LaunchedEffect(key1 = pagerState.currentPage, pagerState.isScrollInProgress) {
+                    if (!pagerState.isScrollInProgress) {
+                        selectedTabIndex = pagerState.currentPage
+                    }
+                }
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.primary
                 ) {
-                    var selectedTabIndex by remember {
-                        mutableIntStateOf(0)
-                    }
-                    val pagerState = rememberPagerState {
-                        tabItems.size
-                    }
-                    LaunchedEffect(key1 = selectedTabIndex ) {
-                        pagerState.animateScrollToPage(selectedTabIndex)
-                    }
-                    LaunchedEffect(key1 = pagerState.currentPage, pagerState.isScrollInProgress) {
-                        if (!pagerState.isScrollInProgress) {
-                            selectedTabIndex = pagerState.currentPage
-                        }
-                    }
-                    Column (
-                        Modifier.fillMaxSize()
-                    ){
-                        TabRow(selectedTabIndex = selectedTabIndex) {
-                            tabItems.forEachIndexed { index, tabItem ->
-                                Tab(
-                                    selected = index == selectedTabIndex, //If (it) index is same as what's on tab item
-                                    onClick = { selectedTabIndex = index },
-                                    text = {
-                                        Text(text = tabItem.title)
-                                    },
-                                    icon = {
-                                        Icon(
-                                            imageVector = if(index == selectedTabIndex) {
-                                                tabItem.selectedIcon
-                                            } else {
-                                                tabItem.unselectedIcon
-                                            },
-                                            contentDescription = tabItem.title)
-                                    }
-                                )
+                    Scaffold (
+                        bottomBar = {
+                            NavigationBar {
+                                tabItems.forEachIndexed { index, tabItem ->
+                                    NavigationBarItem(
+                                        selected = index == selectedTabIndex, //If (it) index is same as what's on tab item,
+                                        onClick = {
+                                                    selectedTabIndex = index
+                                            navController.navigate(tabItem.route)
+                                                  },
+                                        icon = {
+                                            Icon(
+                                                imageVector = if(index == selectedTabIndex) {
+                                                    tabItem.selectedIcon
+                                                } else {
+                                                    tabItem.unselectedIcon
+                                                },
+                                                contentDescription = tabItem.title)
+                                        },
+                                        label = { Text(text = tabItem.title) }
+                                    )
+                                }
                             }
                         }
+                    ) { paddedValues -> paddedValues //Specified to not use generic "it"
+
                         HorizontalPager(
                             state = pagerState,
-                            Modifier.fillMaxSize(1f)) {
-                            when(it){
+                            Modifier.fillMaxSize(1f)) { pageIndex ->
+                            when(pageIndex){
                                 0 -> HomeScreen()
                                 1 -> ArtistScreen()
                                 2 -> MediaScreen()
@@ -131,18 +165,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     SL4GComposeTheme {
-        Greeting("Android")
+        //Greeting("Android")
     }
 }
