@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModel
 
 class ContactScreenViewModel: ViewModel() {
 
-    lateinit var name: String
-    lateinit var phoneNumber: String
-    lateinit var messageBody: String
+    var name: String = ""
+    var phoneNumber: String = ""
+    var messageBody: String = ""
 
     fun validateMessage() {
         nameValidate()
