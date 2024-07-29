@@ -2,6 +2,7 @@ package com.ookie.sl4gcompose.ui.screens
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,7 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ookie.sl4gcompose.R
-import com.ookie.sl4gcompose.model.Message
+import com.ookie.sl4gcompose.data.UIEvent
+import com.ookie.sl4gcompose.model.MessageState
 
 @Composable
 fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) {
@@ -87,24 +89,30 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         Spacer(modifier = Modifier.padding(8.dp))
         Button(
             onClick = {
-                Message(
+                Log.i("Ebron", "${MessageState(name,phoneNumber, messageBody)}")
+                MessageState(
                     name = name,
                     phoneNumber = phoneNumber,
                     messageBody = messageBody
                 )
-                contactScreenViewModel.validateMessage()
+                Log.i("Ebron", "${MessageState(name,phoneNumber, messageBody)}")
+                Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
+                //contactScreenViewModel.onEvent(UIEvent.SubmitButtonClicked)
+                if (contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))) {
+                    Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
+                    //Construct and launch email
+                    val intent = Intent(Intent.ACTION_SENDTO)
+                    intent.setData(Uri.parse("mailto:")) // only email apps should handle this
+                    intent.putExtra(Intent.EXTRA_EMAIL, sl4gEmail)
 
-                //Construct and launch email
-                val intent = Intent(Intent.ACTION_SENDTO)
-                intent.setData(Uri.parse("mailto:")) // only email apps should handle this
-                intent.putExtra(Intent.EXTRA_EMAIL, sl4gEmail)
+                    // TODO: Format this default Email better
+                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
+                    intent.putExtra(Intent.EXTRA_TEXT, phoneNumber + messageBody)
 
-                // TODO: Format this default Email better 
-                intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
-                intent.putExtra(Intent.EXTRA_TEXT, phoneNumber + messageBody)
-
-                startActivity(context, intent, null)
+                    startActivity(context, intent, null)
+                }
             },
+            enabled = contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody)),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
         ) {
