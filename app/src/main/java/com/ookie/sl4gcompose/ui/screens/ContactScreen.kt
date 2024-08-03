@@ -105,13 +105,14 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
                     Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
                     //Construct and launch email
                     val intent = Intent(Intent.ACTION_SENDTO)
-                    intent.setData(Uri.parse("mailto:")) // only email apps should handle this
-                    intent.putExtra(Intent.EXTRA_EMAIL, sl4gEmail)
-                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
-                    intent.putExtra(Intent.EXTRA_TEXT,
-                        "Name: $name \nPhone: $phoneNumber \n \n$messageBody"
-                    )
 
+                    // only email apps should handle this
+                    intent.setData(Uri.parse("mailto:"))
+
+                    //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
+                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(sl4gEmail))
+                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
+                    intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
                     startActivity(context, intent, null)
                 }
             },
