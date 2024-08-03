@@ -3,6 +3,7 @@ package com.ookie.sl4gcompose.ui.screens
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -42,7 +43,6 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
             .fillMaxWidth()
             .padding(24.dp),
     ) {
-
         var name by rememberSaveable { mutableStateOf("") }
         var phoneNumber by rememberSaveable { mutableStateOf("") }
         var messageBody by rememberSaveable { mutableStateOf("") }
@@ -50,7 +50,6 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         contactScreenViewModel.name = name
         contactScreenViewModel.phoneNumber = phoneNumber
         contactScreenViewModel.messageBody = messageBody
-
 
         Image(
             painter = painterResource(id = R.drawable.sl4gministriesdefault),
@@ -98,31 +97,17 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         Spacer(modifier = Modifier.padding(8.dp))
         Button(
             onClick = {
-                Log.i("Ebron", "${MessageState(name,phoneNumber, messageBody)}")
                 MessageState(
                     name = name,
                     phoneNumber = phoneNumber,
                     messageBody = messageBody
                 )
-                Log.i("Ebron", "${MessageState(name,phoneNumber, messageBody)}")
-                Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
                 contactScreenViewModel.onEvent(UIEvent.SubmitButtonClicked)
-//                if (contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))) {
-//                    Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
-//                    //Construct and launch email
-//                    val intent = Intent(Intent.ACTION_SENDTO)
-//
-//                    // only email apps should handle this
-//                    intent.setData(Uri.parse("mailto:"))
-//
-//                    //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
-//                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
-//                    intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
-//                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
-//                    intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
-//
-//                }
-                startActivity(context, contactScreenViewModel.intent, null)
+                if (contactScreenViewModel.intentStatusSuccesful.value != false) {
+                    startActivity(context, contactScreenViewModel.intent, null)
+                } else {
+                    Toast.makeText(context, R.string.cannot_send_email_message, Toast.LENGTH_LONG).show()
+                }
             },
             enabled = contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody)),
             modifier = Modifier
@@ -130,9 +115,7 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         ) {
             Text(text = stringResource(id = R.string.submit_button_label))
         }
-
     }
-
 }
 
 @Preview(showBackground = true)

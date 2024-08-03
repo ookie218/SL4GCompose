@@ -133,6 +133,7 @@
     <string name="book_us_button_label">Book Us</string>
     <string name="show_less">Show less</string>
     <string name="show_more">Show more</string>
+    <string name="cannot_send_email_message">Unable to send email, please check input</string>
 
 
 

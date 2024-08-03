@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.text.isDigitsOnly
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ookie.sl4gcompose.data.ContactScreenUIState
 import com.ookie.sl4gcompose.data.UIEvent
@@ -22,6 +23,7 @@ class ContactScreenViewModel: ViewModel() {
 
     var contactScreenUIState = mutableStateOf(ContactScreenUIState())
     var intent = Intent(Intent.ACTION_SENDTO)
+    var intentStatusSuccesful = MutableLiveData<Boolean?>()
 
     //These will be updated with rememberSavable calls on Screen
     var name: String = ""
@@ -71,24 +73,25 @@ class ContactScreenViewModel: ViewModel() {
 //                intent.putExtra(Intent.EXTRA_TEXT, phoneNumber + messageBody)
 //
                 if (validateMessage(MessageState(name,phoneNumber, messageBody))) {
-
-                    //Construct and launch email
-                    //intent = Intent(Intent.ACTION_SENDTO)
-
-                    // only email apps should handle this
-                    intent.setData(Uri.parse("mailto:"))
-
-                    //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
-                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
-                    intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
-                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
-                    intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
+                    intentStatusSuccesful.value = true
+                    constructEmailIntent()
+                } else {
+                    intentStatusSuccesful.value = false
                 }
-
             }
         }
     }
 
+    private fun constructEmailIntent() {
+        // only email apps should handle this
+        intent.setData(Uri.parse("mailto:"))
+
+        //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
+        intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
+        intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
+        intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
+    }
 
     private fun nameValidate(name: String): Boolean {
         // TODO: this also needs to ensure it is only alpha characters
