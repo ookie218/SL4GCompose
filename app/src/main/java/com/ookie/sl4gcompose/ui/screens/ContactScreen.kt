@@ -25,14 +25,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ookie.sl4gcompose.R
 import com.ookie.sl4gcompose.data.UIEvent
 import com.ookie.sl4gcompose.model.MessageState
-
-const val SL4G_EMAIL = "switchinlanes4god@gmail.com"
-const val OOKIE_EMAIL = "ookieebron@gmail.com"
 
 @Composable
 fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) {
@@ -48,6 +46,10 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         var name by rememberSaveable { mutableStateOf("") }
         var phoneNumber by rememberSaveable { mutableStateOf("") }
         var messageBody by rememberSaveable { mutableStateOf("") }
+
+        contactScreenViewModel.name = name
+        contactScreenViewModel.phoneNumber = phoneNumber
+        contactScreenViewModel.messageBody = messageBody
 
 
         Image(
@@ -67,6 +69,7 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         TextField(
             value = name,
             onValueChange = {name = it },
+            maxLines = 1,
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -78,6 +81,7 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
             value = phoneNumber,
             onValueChange = { phoneNumber = it },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            maxLines = 1,
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -102,22 +106,23 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
                 )
                 Log.i("Ebron", "${MessageState(name,phoneNumber, messageBody)}")
                 Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
-                //contactScreenViewModel.onEvent(UIEvent.SubmitButtonClicked)
-                if (contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))) {
-                    Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
-                    //Construct and launch email
-                    val intent = Intent(Intent.ACTION_SENDTO)
-
-                    // only email apps should handle this
-                    intent.setData(Uri.parse("mailto:"))
-
-                    //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
-                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
-                    intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
-                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
-                    intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
-                    startActivity(context, intent, null)
-                }
+                contactScreenViewModel.onEvent(UIEvent.SubmitButtonClicked)
+//                if (contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))) {
+//                    Log.i("Ebron", "${contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody))}")
+//                    //Construct and launch email
+//                    val intent = Intent(Intent.ACTION_SENDTO)
+//
+//                    // only email apps should handle this
+//                    intent.setData(Uri.parse("mailto:"))
+//
+//                    //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
+//                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
+//                    intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
+//                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
+//                    intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
+//
+//                }
+                startActivity(context, contactScreenViewModel.intent, null)
             },
             enabled = contactScreenViewModel.validateMessage(MessageState(name,phoneNumber, messageBody)),
             modifier = Modifier

@@ -15,15 +15,18 @@ import com.ookie.sl4gcompose.data.ContactScreenUIState
 import com.ookie.sl4gcompose.data.UIEvent
 import com.ookie.sl4gcompose.model.MessageState
 
+const val SL4G_EMAIL = "switchinlanes4god@gmail.com"
+const val OOKIE_EMAIL = "ookieebron@gmail.com"
+
 class ContactScreenViewModel: ViewModel() {
 
     var contactScreenUIState = mutableStateOf(ContactScreenUIState())
-    val sl4gEmail = "switchinlanes4god@gmail.com"
-    //val context = LocalContext.current // BAD PRACTICE! MEMORY LEAK!!!
+    var intent = Intent(Intent.ACTION_SENDTO)
 
-//    var name: String = ""
-//    var phoneNumber: String = ""
-//    var messageBody: String = ""
+    //These will be updated with rememberSavable calls on Screen
+    var name: String = ""
+    var phoneNumber: String = ""
+    var messageBody: String = ""
 
     fun validateMessage(messageState: MessageState) : Boolean {
         Log.i("Ebron", "name: ${messageState.name}")
@@ -67,8 +70,20 @@ class ContactScreenViewModel: ViewModel() {
 //                intent.putExtra(Intent.EXTRA_PHONE_NUMBER, uiEvent.phoneNumber)
 //                intent.putExtra(Intent.EXTRA_TEXT, phoneNumber + messageBody)
 //
-//                startActivity(context, intent, null)
+                if (validateMessage(MessageState(name,phoneNumber, messageBody))) {
 
+                    //Construct and launch email
+                    //intent = Intent(Intent.ACTION_SENDTO)
+
+                    // only email apps should handle this
+                    intent.setData(Uri.parse("mailto:"))
+
+                    //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
+                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
+                    intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
+                    intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
+                    intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
+                }
 
             }
         }
@@ -77,18 +92,15 @@ class ContactScreenViewModel: ViewModel() {
 
     private fun nameValidate(name: String): Boolean {
         // TODO: this also needs to ensure it is only alpha characters
-
         return name.isNotBlank() && !name.isDigitsOnly()
     }
 
     private fun phoneNumberValidate(phoneNumber: String): Boolean {
-        // TODO: this also needs to ensure it is only numerical characters / do we want this to be nullable?
         return phoneNumber.isNotBlank() && phoneNumber.isDigitsOnly()
     }
 
     private fun messageBodyValidate(messageBody: String): Boolean {
         return messageBody.isNotBlank()
     }
-
 
 }
