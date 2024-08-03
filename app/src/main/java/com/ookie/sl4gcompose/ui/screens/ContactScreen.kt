@@ -31,10 +31,12 @@ import com.ookie.sl4gcompose.R
 import com.ookie.sl4gcompose.data.UIEvent
 import com.ookie.sl4gcompose.model.MessageState
 
+const val SL4G_EMAIL = "switchinlanes4god@gmail.com"
+const val OOKIE_EMAIL = "ookieebron@gmail.com"
+
 @Composable
 fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) {
 
-    val sl4gEmail = "switchinlanes4god@gmail.com"
     val context = LocalContext.current
 
     Column (
@@ -75,7 +77,7 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         TextField(
             value = phoneNumber,
             onValueChange = { phoneNumber = it },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -110,7 +112,8 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
                     intent.setData(Uri.parse("mailto:"))
 
                     //In order to populate the "To:" field, this must be an Array of strings, not just a string itself!
-                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(sl4gEmail))
+                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(SL4G_EMAIL))
+                    intent.putExtra(Intent.EXTRA_BCC, arrayOf(OOKIE_EMAIL))
                     intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
                     intent.putExtra(Intent.EXTRA_TEXT, "Name: $name \nPhone: $phoneNumber \n \n$messageBody")
                     startActivity(context, intent, null)
