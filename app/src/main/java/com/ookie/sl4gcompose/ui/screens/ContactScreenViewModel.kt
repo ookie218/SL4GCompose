@@ -2,13 +2,7 @@ package com.ookie.sl4gcompose.ui.screens
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,22 +17,12 @@ class ContactScreenViewModel: ViewModel() {
 
     var contactScreenUIState = mutableStateOf(ContactScreenUIState())
     var intent = Intent(Intent.ACTION_SENDTO)
-    var intentStatusSuccesful = MutableLiveData<Boolean?>()
+    var intentStatusSuccessful = MutableLiveData<Boolean?>()
 
     //These will be updated with rememberSavable calls on Screen
     var name: String = ""
     var phoneNumber: String = ""
     var messageBody: String = ""
-
-    fun validateMessage(messageState: MessageState) : Boolean {
-        Log.i("Ebron", "name: ${messageState.name}")
-        Log.i("Ebron", "phoneNumber: ${messageState.phoneNumber}")
-        Log.i("Ebron", "messageBody: ${messageState.messageBody}")
-
-        return nameValidate(messageState.name) &&
-        phoneNumberValidate(messageState.phoneNumber.toString()) &&
-        messageBodyValidate(messageState.messageBody)
-    }
 
     fun onEvent(uiEvent: UIEvent) {
         when (uiEvent) {
@@ -61,25 +45,20 @@ class ContactScreenViewModel: ViewModel() {
             }
 
             is UIEvent.SubmitButtonClicked -> {
-                //validateMessage()
-
-//                //Construct and launch email
-//                val intent = Intent(Intent.ACTION_SENDTO)
-//                intent.setData(Uri.parse("mailto:")) // only email apps should handle this
-//                intent.putExtra(Intent.EXTRA_EMAIL, sl4gEmail)
-//
-//                // TODO: Format this default Email better
-//                intent.putExtra(Intent.EXTRA_PHONE_NUMBER, uiEvent.phoneNumber)
-//                intent.putExtra(Intent.EXTRA_TEXT, phoneNumber + messageBody)
-//
                 if (validateMessage(MessageState(name,phoneNumber, messageBody))) {
-                    intentStatusSuccesful.value = true
+                    intentStatusSuccessful.value = true
                     constructEmailIntent()
                 } else {
-                    intentStatusSuccesful.value = false
+                    intentStatusSuccessful.value = false
                 }
             }
         }
+    }
+
+    fun validateMessage(messageState: MessageState) : Boolean {
+        return nameValidate(messageState.name) &&
+                phoneNumberValidate(messageState.phoneNumber.toString()) &&
+                messageBodyValidate(messageState.messageBody)
     }
 
     private fun constructEmailIntent() {
