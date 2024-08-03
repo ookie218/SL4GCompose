@@ -107,10 +107,10 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
                     val intent = Intent(Intent.ACTION_SENDTO)
                     intent.setData(Uri.parse("mailto:")) // only email apps should handle this
                     intent.putExtra(Intent.EXTRA_EMAIL, sl4gEmail)
-
-                    // TODO: Format this default Email better
                     intent.putExtra(Intent.EXTRA_PHONE_NUMBER, phoneNumber)
-                    intent.putExtra(Intent.EXTRA_TEXT, phoneNumber + messageBody)
+                    intent.putExtra(Intent.EXTRA_TEXT,
+                        "Name: $name \nPhone: $phoneNumber \n \n$messageBody"
+                    )
 
                     startActivity(context, intent, null)
                 }
