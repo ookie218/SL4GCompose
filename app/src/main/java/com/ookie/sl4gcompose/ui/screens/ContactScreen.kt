@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -51,10 +52,11 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
         contactScreenViewModel.messageBody = messageBody
 
         Image(
-            painter = painterResource(id = R.drawable.sl4gministriesdefault),
+            painter = painterResource(id = R.drawable.sl4gministries_nowhite),
             contentDescription = stringResource(id = R.string.sl4g_photo_description),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
+                .size(150.dp)
         )
         Spacer(modifier = Modifier.padding(8.dp))
         Text(
