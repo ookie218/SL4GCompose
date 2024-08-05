@@ -15,11 +15,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material3.Card
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,15 +48,26 @@ import androidx.wear.compose.material.Icon
 @Composable
 fun ArtistScreen(artistScreenViewModel: ArtistScreenViewModel = viewModel()) {
 
-        val artists = artistScreenViewModel.getArtsitData()
-        Log.i("screen TAG", "$artists")
+    val artists = artistScreenViewModel.getArtsitData()
 
+    Column (
+        modifier = Modifier
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.sl4gministries_nowhite),
+            contentDescription = stringResource(id = R.string.sl4g_photo_description),
+            modifier = Modifier.size(150.dp)
+        )
         LazyColumn {
             items(artists) {
                 ArtistItem(it)
             }
         }
     }
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -70,56 +85,58 @@ fun ArtistScreenPreview() {
 fun ArtistItem(artist: Artist) {
     var expanded by remember { mutableStateOf(false) }
 
-    Row (
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth()
-            .padding(12.dp)
-            .animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessLow
-                )
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ){
-        Image(
-            painter = painterResource(id = artist.imageResourceId),
-            contentDescription = artist.name,
+    Card (
+        modifier = Modifier.padding(vertical = 4.dp)
+    ) {
+        Row (
             modifier = Modifier
-                .size(72.dp)
-                .clip(CircleShape)
-        )
-        Spacer(modifier = Modifier.padding(8.dp))
-        Column (
-            modifier = Modifier
-                .weight(1f)
-                .padding(8.dp)
-        ){
-            Text(
-                text = stringResource(id = artist.name.toInt()), //Pass in actual Int value to return string
-                color = Color.Black,
-                fontWeight = FontWeight.Bold
+                .fillMaxWidth()
+                .padding(12.dp)
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow
+                    )
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = artist.imageResourceId),
+                contentDescription = artist.name,
+                modifier = Modifier
+                    .size(72.dp)
+                    .clip(CircleShape)
             )
-            if (expanded) {
+            Spacer(modifier = Modifier.padding(24.dp))
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(8.dp)
+            ) {
                 Text(
-                    text = stringResource(artist.artistBio.toInt()),
+                    text = stringResource(id = artist.name.toInt()), //Pass in actual Int value to return string
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
+                if (expanded) {
+                    Text(
+                        text = stringResource(artist.artistBio.toInt()),
+                    )
+                }
+            }
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(
+                    imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                    contentDescription = if (expanded) {
+                        stringResource(R.string.show_less)
+                    } else {
+                        stringResource(R.string.show_more)
+                    },
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
-        IconButton(onClick = { expanded = !expanded }) {
-            Icon(
-                imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                contentDescription = if (expanded) {
-                    stringResource(R.string.show_less)
-                } else {
-                    stringResource(R.string.show_more)
-                },
-                modifier = Modifier.background(Color.Black)
-            )
-        }
-
     }
 
 }

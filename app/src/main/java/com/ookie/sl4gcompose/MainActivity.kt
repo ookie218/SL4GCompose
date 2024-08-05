@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
@@ -136,16 +138,18 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
-                    ) { paddedValues -> paddedValues //Specified to not use generic "it"
-
-                        HorizontalPager(
-                            state = pagerState,
-                            Modifier.fillMaxSize(1f)) { pageIndex ->
-                            when(pageIndex){
-                                0 -> HomeScreen()
-                                1 -> ArtistScreen()
-                                2 -> MediaScreen()
-                                3 -> ContactScreen()
+                    ) { paddedValues ->  //Specified to not use generic "it"
+                        //Box is used a wrapper to make sure content in screen is not cut off
+                        Box(modifier = Modifier.padding(paddedValues)) {
+                            HorizontalPager(
+                                state = pagerState,
+                                Modifier.fillMaxSize(1f)) { pageIndex ->
+                                when(pageIndex){
+                                    0 -> HomeScreen()
+                                    1 -> ArtistScreen()
+                                    2 -> MediaScreen()
+                                    3 -> ContactScreen()
+                                }
                             }
                         }
                     }
