@@ -68,7 +68,7 @@ fun ArtistScreen(artistScreenViewModel: ArtistScreenViewModel = viewModel()) {
                 .padding(8.dp)
         )
         Text(
-            text = stringResource(id = R.string.meet_the_artists),
+            text = stringResource(id = R.string.artists),
             modifier = Modifier.fillMaxWidth(),
             fontSize = 16.sp,
             textAlign = TextAlign.Start,
@@ -94,75 +94,75 @@ fun ArtistScreenPreview() {
  * Individual List item for Artists being displayed in LazyColumn
  * */
 
-@Composable
-fun ArtistItem(artist: Artist) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Card (
-        modifier = Modifier.padding(vertical = 4.dp)
-    ) {
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp)
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessLow
-                    )
-                ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(id = artist.imageResourceId),
-                contentDescription = artist.name,
-                modifier = Modifier
-                    .size(72.dp)
-                    .clip(CircleShape)
-            )
-            Spacer(modifier = Modifier.padding(24.dp))
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp)
-            ) {
-                Text(
-                    text = stringResource(id = artist.name.toInt()), //Pass in actual Int value to return string
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold
-                )
-                if (expanded) {
-                    Text(
-                        text = stringResource(artist.artistBio.toInt()),
-                    )
-                }
-            }
-            IconButton(onClick = { expanded = !expanded }) {
-                Icon(
-                    imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                    contentDescription = if (expanded) {
-                        stringResource(R.string.show_less)
-                    } else {
-                        stringResource(R.string.show_more)
-                    },
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        }
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ArtistItemPreview() {
-    ArtistItem(artist = Artist(
-        1,
-        R.string.ookie_full_name.toString(),
-        "",
-        R.drawable.ookieprofilepic,
-        "test")
-    )
-
-}
+//@Composable
+//fun ArtistItem(artist: Artist) {
+//    var expanded by remember { mutableStateOf(false) }
+//
+//    Card (
+//        modifier = Modifier.padding(vertical = 4.dp)
+//    ) {
+//        Row (
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(12.dp)
+//                .animateContentSize(
+//                    animationSpec = spring(
+//                        dampingRatio = Spring.DampingRatioMediumBouncy,
+//                        stiffness = Spring.StiffnessLow
+//                    )
+//                ),
+//            verticalAlignment = Alignment.CenterVertically,
+//            horizontalArrangement = Arrangement.Center
+//        ) {
+//            Image(
+//                painter = painterResource(id = artist.imageResourceId),
+//                contentDescription = artist.name,
+//                modifier = Modifier
+//                    .size(72.dp)
+//                    .clip(CircleShape)
+//            )
+//            Spacer(modifier = Modifier.padding(24.dp))
+//            Column(
+//                modifier = Modifier
+//                    .weight(1f)
+//                    .padding(8.dp)
+//            ) {
+//                Text(
+//                    text = stringResource(id = artist.name.toInt()), //Pass in actual Int value to return string
+//                    color = Color.Black,
+//                    fontWeight = FontWeight.Bold
+//                )
+//                if (expanded) {
+//                    Text(
+//                        text = stringResource(artist.artistBio.toInt()),
+//                    )
+//                }
+//            }
+//            IconButton(onClick = { expanded = !expanded }) {
+//                Icon(
+//                    imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+//                    contentDescription = if (expanded) {
+//                        stringResource(R.string.show_less)
+//                    } else {
+//                        stringResource(R.string.show_more)
+//                    },
+//                    modifier = Modifier.weight(1f)
+//                )
+//            }
+//        }
+//    }
+//
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun ArtistItemPreview() {
+//    ArtistItem(artist = Artist(
+//        1,
+//        R.string.ookie_full_name.toString(),
+//        "",
+//        R.drawable.ookieprofilepic,
+//        "test")
+//    )
+//
+//}

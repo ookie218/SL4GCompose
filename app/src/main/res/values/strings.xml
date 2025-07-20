@@ -12,18 +12,22 @@
     <string name="sl4g_logo">SL4G_Logo</string>
     <string name="sl4g_name">SwitchinLanes</string>
     <string name="sl4g_name_full">SwitchinLanes4God</string>
+    <string name="sl4g_main_header">We Are SwitchinLanes 4 God</string>
     <string name="sl4g_photo_description">SwitchinLanes Image Logo</string>
-    <string name="sl4g_bio">"SwitchinLanes" (SL4G) was founded in 2014 by Deane Walden.
+    <string name="sl4g_home_photo_description">SwitchinLanes Home Image Logo</string>
+    <string name="sl4g_bio">"SwitchinLanes" (SL4G) was founded in 2014.
         The group consists of 6 members: Ronald Easley (Ron Rhythm), Michael Ebron (Ookie Ebron),
         Samuel McFadden Jr. (S.H.E.E.S.H.), Justin Shelton (JuJu), and Jerimy Mask (JMask).
-        The majority currently reside on the outskirts of Richmond, Virginia.
+        All artists residing throughtout different parts of Richmond, Virginia.
         Each member of the group has profound life changing testimonies that ultimately drew them
-        together, and it all begins with Founder, Deane Walden.
-        -SwitchinLanes-
+        together. Musically they each bring different sounds and skillsets which come together to form:
+        The Rhythm of Heaven.
+        \n \n
+        ~SwitchinLanes~
     </string>
 
     <!-- Artists Info -->
-    <string name="meet_the_artists">Meet The Artists</string>
+    <string name="artists">Artists</string>
     <string name="deane_full_name">Deane Walden</string>
     <string name="deane_bio">Deane Walden was born and raised in Richmond, VA.
         Prior to the formation of SwitchinLanes, Deane focused on the production of secular music
