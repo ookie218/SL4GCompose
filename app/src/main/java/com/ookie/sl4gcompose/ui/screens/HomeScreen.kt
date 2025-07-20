@@ -85,12 +85,6 @@ fun HomeScreen(modifier: Modifier = Modifier, homeScreenViewModel: HomeScreenVie
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}
-
 @Composable
 fun ArtistItem(artist: Artist) {
     Column (
@@ -157,6 +151,15 @@ fun ArtistImageButton(artist: Artist) {
 
         }
     }
+}
+
+
+//Screen Previews
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    HomeScreen()
 }
 
 @Preview(showBackground = true)

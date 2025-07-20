@@ -13,11 +13,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.MusicVideo
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Mail
 import androidx.compose.material.icons.outlined.MusicVideo
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -37,7 +35,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ookie.sl4gcompose.model.TabItem
-import com.ookie.sl4gcompose.ui.screens.ArtistScreen
 import com.ookie.sl4gcompose.ui.screens.ContactScreen
 import com.ookie.sl4gcompose.ui.screens.HomeScreen
 import com.ookie.sl4gcompose.ui.screens.MediaScreen
@@ -55,12 +52,12 @@ class MainActivity : ComponentActivity() {
                 unselectedIcon = Icons.Outlined.Home,
                 selectedIcon = Icons.Filled.Home
             ),
-            TabItem(
-                title = "Artists",
-                route = "Artists",
-                unselectedIcon = Icons.Outlined.Person,
-                selectedIcon = Icons.Filled.Person
-            ),
+//            TabItem(
+//                title = "Artists",
+//                route = "Artists",
+//                unselectedIcon = Icons.Outlined.Person,
+//                selectedIcon = Icons.Filled.Person
+//            ),
             TabItem(
                 title = "Media",
                 route = "Media",
@@ -82,13 +79,13 @@ class MainActivity : ComponentActivity() {
                     composable(tabItems[0].route) {
                         HomeScreen()
                     }
+//                    composable(tabItems[1].route) {
+//                        ArtistScreen()
+//                    }
                     composable(tabItems[1].route) {
-                        ArtistScreen()
-                    }
-                    composable(tabItems[2].route) {
                         MediaScreen()
                     }
-                    composable(tabItems[3].route) {
+                    composable(tabItems[2].route) {
                         ContactScreen()
                     }
                 }
@@ -146,9 +143,9 @@ class MainActivity : ComponentActivity() {
                                 Modifier.fillMaxSize(1f)) { pageIndex ->
                                 when(pageIndex){
                                     0 -> HomeScreen()
-                                    1 -> ArtistScreen()
-                                    2 -> MediaScreen()
-                                    3 -> ContactScreen()
+//                                    1 -> ArtistScreen()
+                                    1 -> MediaScreen()
+                                    2 -> ContactScreen()
                                 }
                             }
                         }
