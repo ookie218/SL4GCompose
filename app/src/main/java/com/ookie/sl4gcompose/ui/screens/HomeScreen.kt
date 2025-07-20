@@ -16,11 +16,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -28,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,19 +32,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.wear.compose.material.Icon
 import com.ookie.sl4gcompose.R
 import com.ookie.sl4gcompose.model.Artist
 import com.ookie.sl4gcompose.ui.theme.Typography
-import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, homeScreenViewModel: HomeScreenViewModel = viewModel()) {
@@ -121,7 +112,6 @@ fun ArtistItem(artist: Artist) {
 @Composable
 fun ArtistImageButton(artist: Artist) {
     val sheetState = rememberModalBottomSheetState(/* skipPartiallyExpanded = false */)
-    val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
 
     Image(
@@ -131,13 +121,6 @@ fun ArtistImageButton(artist: Artist) {
                 .size(120.dp)
                 .clip(CircleShape)
                 .clickable { showBottomSheet = true }
-
-//              TODO: Make sure we understand this!!
-//                .clickable { scope.launch { sheetState.hide() }.invokeOnCompletion {
-//                    if (!sheetState.isVisible) {
-//                        showBottomSheet = false
-//                    }
-//                } }
         )
     if (showBottomSheet) {
         ModalBottomSheet(
