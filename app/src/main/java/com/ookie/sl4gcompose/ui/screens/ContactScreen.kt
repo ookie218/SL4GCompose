@@ -56,7 +56,7 @@ fun ContactScreen(contactScreenViewModel: ContactScreenViewModel = viewModel()) 
             contentDescription = stringResource(id = R.string.sl4g_photo_description),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .size(150.dp)
+                .size(200.dp)
         )
         Spacer(modifier = Modifier.padding(8.dp))
         Text(
